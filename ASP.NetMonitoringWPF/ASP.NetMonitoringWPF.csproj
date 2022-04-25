@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+<ItemGroup>
+    <None Remove="Resources\Fonts\ar-ciela_compartment.ttf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-Black.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-Bold.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-BookItalic.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-Light.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-Thin.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-ThinItalic.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-UltraItalic.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-XLight.otf" />
+    <None Remove="Resources\Fonts\Gotham\Gotham-XLightItalic.otf" />
+    <None Remove="Resources\Fonts\Gotham\GothamBold.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamBoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamBook.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamBookItalic.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamLight.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamLightItalic.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamMedium.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamMediumItalic.ttf" />
+    <None Remove="Resources\Fonts\Gotham\GothamMedium_1.ttf" />
+    <None Remove="Resources\Fonts\hymmnos.ttf" />
+    <None Remove="Resources\Fonts\password.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Black.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-ExtraBold.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-ExtraLight.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Light.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Medium.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-SemiBold.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Thin.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-VariableFont_wght.ttf" />
+    <None Remove="Resources\Icons\background.jpg" />
+    <None Remove="Resources\Icons\cross1.png" />
+    <None Remove="Resources\Icons\cross2.png" />
+    <None Remove="Resources\Icons\cross2White.png" />
+    <None Remove="Resources\Icons\email.png" />
+    <None Remove="Resources\Icons\emailGray.png" />
+    <None Remove="Resources\Icons\emailGray2.png" />
+    <None Remove="Resources\Icons\emailGray3.png" />
+    <None Remove="Resources\Icons\eyeGray.png" />
+    <None Remove="Resources\Icons\maximize1.png" />
+    <None Remove="Resources\Icons\maximize2.png" />
+    <None Remove="Resources\Icons\maximizeWhite.png" />
+    <None Remove="Resources\Icons\minimize.png" />
+    <None Remove="Resources\Icons\minimizeWhite.png" />
+    <None Remove="Resources\Icons\phone.png" />
+    <None Remove="Resources\Icons\phone2.png" />
+    <None Remove="Resources\Icons\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\Gotham\Gotham-Black.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-Bold.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-BookItalic.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-Light.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-Thin.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-ThinItalic.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-UltraItalic.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-XLight.otf" />
+    <Resource Include="Resources\Fonts\Gotham\Gotham-XLightItalic.otf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamBold.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamBoldItalic.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamBook.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamBookItalic.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamLight.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamLightItalic.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamMedium.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamMediumItalic.ttf" />
+    <Resource Include="Resources\Fonts\Gotham\GothamMedium_1.ttf" />
+    <Resource Include="Resources\Fonts\password.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-Black.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-ExtraBold.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-ExtraLight.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-Light.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-Medium.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-SemiBold.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-Thin.ttf" />
+    <Resource Include="Resources\Fonts\RobotoSlab\RobotoSlab-VariableFont_wght.ttf" />
+    <Resource Include="Resources\Icons\background.jpg" />
+    <Resource Include="Resources\Icons\cross1.png" />
+    <Resource Include="Resources\Icons\cross2.png" />
+    <Resource Include="Resources\Icons\cross2White.png" />
+    <Resource Include="Resources\Icons\email.png" />
+    <Resource Include="Resources\Icons\emailGray.png" />
+    <Resource Include="Resources\Icons\eyeGray.png" />
+    <Resource Include="Resources\Icons\maximize1.png" />
+    <Resource Include="Resources\Icons\maximize2.png" />
+    <Resource Include="Resources\Icons\maximizeWhite.png" />
+    <Resource Include="Resources\Icons\minimize.png" />
+    <Resource Include="Resources\Icons\minimizeWhite.png" />
+    <Resource Include="Resources\Icons\phone.png" />
+    <Resource Include="Resources\Icons\user.png" />
+  </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+      <PackageReference Include="Microsoft.Management.Infrastructure" Version="2.0.0" />
+    </ItemGroup>
+
+</Project>
