@@ -10,11 +10,11 @@ namespace ASP.NetMonitoringWPF.Commands;
 public class ChangeConnectionCommand : ICommand {
 
     private readonly NotificationViewModel _notificationViewModel;
-    private readonly MonitoringModel _monitoringModel;
+    private readonly DataCenter _dataCenter;
 
-    public ChangeConnectionCommand(NotificationViewModel notificationViewModel, MonitoringModel monitoringModel) {
+    public ChangeConnectionCommand(NotificationViewModel notificationViewModel, DataCenter dataCenter) {
         _notificationViewModel = notificationViewModel;
-        _monitoringModel = monitoringModel;
+        _dataCenter = dataCenter;
     }
 
     public bool CanExecute(object? parameter) => true;
@@ -26,7 +26,7 @@ public class ChangeConnectionCommand : ICommand {
             var cimConnection = new CimConnection(computerName);
             var ans = cimConnection.MakeQuery(
                 "Select RequestsPerSec from Win32_PerfFormattedData_ASP_ActiveServerPages").FirstOrDefault();
-            _monitoringModel.CimConnection = cimConnection;
+            _dataCenter.CimConnection = cimConnection;
             computerName = computerName.Length > 15 ? computerName[..15] + "..." : computerName;
             _notificationViewModel.ErrorMessage = $"Компьютер {computerName} успешно подключён.";
         }

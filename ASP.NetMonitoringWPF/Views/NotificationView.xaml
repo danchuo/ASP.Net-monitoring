@@ -59,7 +59,7 @@
                         </TextBlock.Style>
                     </TextBlock>
 
-                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource LoginButton}"
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource MainButton}"
                             Command="{Binding RegisterCommand}"
                             Content="П Р И В Я З А Т Ь  П О Ч Т У"
                             Background="#1db954"
@@ -115,7 +115,7 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource LoginButton}"
+                    <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource MainButton}"
                             Command="{Binding ChangeConnectionCommand}"
                             CommandParameter="{Binding ComputerName}"
                             Content="И З М Е Н И Т Ь  К О М П Ь Ю Т Е Р"

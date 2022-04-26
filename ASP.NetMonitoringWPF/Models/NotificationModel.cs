@@ -1,18 +1,15 @@
-﻿namespace ASP.NetMonitoringWPF.Models;
+﻿using System.ComponentModel;
+
+namespace ASP.NetMonitoringWPF.Models;
 
 public class NotificationModel {
 
-    private CimConnection _cimConnection;
+    private DataCenter _dataCenter;
+    
+    public bool IsNotificationEnable { get; set; } = false;
 
-    public CimConnection CimConnection {
-        get => _cimConnection;
-
-        set { _cimConnection = value; }
-    }
-
-
-    public NotificationModel(CimConnection cimConnection) {
-        _cimConnection = cimConnection;
+    public NotificationModel(DataCenter dataCenter) {
+        _dataCenter = dataCenter;
     }
 
 }

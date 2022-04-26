@@ -2,18 +2,18 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ASP.NetMonitoringWPF.Commands;
-using MonitoringModel = ASP.NetMonitoringWPF.Models.MonitoringModel;
+using ASP.NetMonitoringWPF.Models;
 using ObservedDataChanges = ASP.NetMonitoringWPF.Models.ObservedDataChanges;
 
 namespace ASP.NetMonitoringWPF.ViewModels;
 
 public class NotificationViewModel : ViewModelBase {
 
-    private readonly MonitoringModel _monitoringModel;
+    private readonly DataCenter _dataCenter;
 
     public MessageViewModel ErrorMessageViewModel { get; }
 
-    public ReadOnlyObservableCollection<ObservedDataChanges> DataChangesList => _monitoringModel.DataChangesList;
+    public ReadOnlyObservableCollection<ObservedDataChanges> DataChangesList => _dataCenter.DataChangesList;
 
     private string _email = String.Empty;
     private string _computerName;
@@ -44,11 +44,11 @@ public class NotificationViewModel : ViewModelBase {
 
     public ICommand ChangeConnectionCommand { get; set; }
 
-    public NotificationViewModel(MonitoringModel monitoringModel) {
-        _monitoringModel = monitoringModel;
-        _computerName = monitoringModel.CimConnection.ComputerName;
+    public NotificationViewModel(DataCenter dataCenter) {
+        _dataCenter = dataCenter;
+        _computerName = dataCenter.CimConnection.ComputerName;
         ErrorMessageViewModel = new MessageViewModel();
-        ChangeConnectionCommand = new ChangeConnectionCommand(this, monitoringModel);
+        ChangeConnectionCommand = new ChangeConnectionCommand(this, dataCenter);
     }
 
 }

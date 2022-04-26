@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using ASP.NetMonitoringWPF.Commands;
+using ASP.NetMonitoringWPF.Models;
 using ASP.NetMonitoringWPF.Navigator;
-using MonitoringModel = ASP.NetMonitoringWPF.Models.MonitoringModel;
 
 namespace ASP.NetMonitoringWPF.ViewModels;
 
@@ -15,16 +15,16 @@ public class MainViewModel : ViewModelBase {
     public ICommand ViewNotificationCommand { get; }
 
 
-    public MainViewModel(INavigator navigator, MonitoringModel monitoringModel) {
+    public MainViewModel(INavigator navigator, DataCenter dataCenter) {
         _navigator = navigator;
         navigator.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
         ViewGraphMonitoringCommand =
             new NavigateCommand<GraphMonitoringViewModel>(navigator,
-                () => new GraphMonitoringViewModel(monitoringModel));
+                () => new GraphMonitoringViewModel(dataCenter));
         ViewNotificationCommand =
             new NavigateCommand<NotificationViewModel>(navigator,
-                () => new NotificationViewModel(monitoringModel));
+                () => new NotificationViewModel(dataCenter));
     }
 
     private void OnCurrentViewModelChanged() {

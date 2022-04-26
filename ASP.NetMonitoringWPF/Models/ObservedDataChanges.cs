@@ -18,9 +18,9 @@ public class ObservedDataChanges : INotifyPropertyChanged {
     private static readonly Timer _timer;
     private static int _currentPosition = -1;
 
-    public string PropertyName { get; }
-    private readonly NetMonitoringWPF.Models.CimConnection _cimConnection;
+    private readonly CimConnection _cimConnection;
     private readonly string _wmiQuery;
+    public string PropertyName { get; }
     public ChartValues<double> Data { get; }
     public double AverageValue { get; set; }
     public double MinimalValue { get; set; }
@@ -28,7 +28,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
 
     public static ReadOnlyObservableCollection<string> Times { get; }
 
-    public ObservedDataChanges(NetMonitoringWPF.Models.CimConnection cimConnection, string wmiQuery) {
+    public ObservedDataChanges(CimConnection cimConnection, string wmiQuery) {
         _cimConnection = cimConnection;
         PropertyName = wmiQuery.Split()[1];
         _wmiQuery = wmiQuery;
@@ -69,6 +69,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
         var value = _cimConnection.GetPropertyValue(PropertyName, _wmiQuery);
         Data[(_currentPosition + 1) % Period] = double.NaN;
         Data[(_currentPosition + 2) % Period] = double.NaN;
+        Data[(_currentPosition + 3) % Period] = double.NaN;
         Data[_currentPosition] = value;
 
         MaximalValue = Data.Where(x => !double.IsNaN(x)).Max();
