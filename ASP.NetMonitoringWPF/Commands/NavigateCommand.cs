@@ -13,8 +13,8 @@ public class NavigateCommand<TViewModel> : ICommand
     private readonly Func<TViewModel> _createViewModel;
 
     public NavigateCommand(INavigator navigator, Func<TViewModel> createViewModel) {
-        this._navigator = navigator;
-        this._createViewModel = createViewModel;
+        _navigator = navigator;
+        _createViewModel = createViewModel;
     }
 
     public void Execute(object? parameter) {
