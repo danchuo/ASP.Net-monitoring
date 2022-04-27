@@ -13,8 +13,8 @@ public class MainViewModel : ViewModelBase {
 
     public ICommand ViewGraphMonitoringCommand { get; }
     public ICommand ViewNotificationCommand { get; }
-
-
+    public ICommand ViewMetersDataCommand { get; }
+    
     public MainViewModel(INavigator navigator, DataCenter dataCenter) {
         _navigator = navigator;
         navigator.CurrentViewModelChanged += OnCurrentViewModelChanged;
@@ -25,6 +25,9 @@ public class MainViewModel : ViewModelBase {
         ViewNotificationCommand =
             new NavigateCommand<NotificationViewModel>(navigator,
                 () => new NotificationViewModel(dataCenter));
+        ViewMetersDataCommand =
+            new NavigateCommand<MetersDataViewModel>(navigator,
+                () => new MetersDataViewModel(dataCenter));
     }
 
     private void OnCurrentViewModelChanged() {

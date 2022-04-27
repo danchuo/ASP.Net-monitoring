@@ -40,11 +40,12 @@
     <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-VariableFont_wght.ttf" />
     <None Remove="Resources\Icons\cross2White.png" />
     <None Remove="Resources\Icons\emailGray.png" />
-     <None Remove="Resources\Icons\eyeGray.png" />
+    <None Remove="Resources\Icons\eyeGray.png" />
     <None Remove="Resources\Icons\maximizeWhite.png" />
     <None Remove="Resources\Icons\minimizeWhite.png" />
     <None Remove="Resources\Icons\phone.png" />
     <None Remove="Resources\Icons\user.png" />
+    <None Remove="Resources\Icons\growth.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +85,7 @@
     <Resource Include="Resources\Icons\minimizeWhite.png" />
     <Resource Include="Resources\Icons\phone.png" />
     <Resource Include="Resources\Icons\user.png" />
+    <Resource Include="Resources\Icons\growth.png" />
   </ItemGroup>
 
     <ItemGroup>

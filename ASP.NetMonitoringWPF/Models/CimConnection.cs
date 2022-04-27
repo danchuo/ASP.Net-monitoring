@@ -27,9 +27,11 @@ public class CimConnection {
     private static Random rnd = new();
 
     public int GetPropertyValue(string propertyName, string queryExpression) {
-        return rnd.Next(0, 100) + MakeQuery(queryExpression).FirstOrDefault()!.CimInstanceProperties
-            .Where(x => x.Name == propertyName)
-            .Select(x => int.Parse(x.Value.ToString() ?? "0")).FirstOrDefault();
+        return
+            rnd.Next(0, 100) + 
+            MakeQuery(queryExpression).FirstOrDefault()!.CimInstanceProperties
+                .Where(x => x.Name == propertyName)
+                .Select(x => int.Parse(x.Value.ToString() ?? "0")).FirstOrDefault();
     }
 
 }

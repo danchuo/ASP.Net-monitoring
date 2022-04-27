@@ -1,7 +1,7 @@
 ﻿<Application x:Class="ASP.NetMonitoringWPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewmodels="clr-namespace:ASP.NetMonitoringWPF.ViewModels"
+             xmlns:viewModels="clr-namespace:ASP.NetMonitoringWPF.ViewModels"
              xmlns:views="clr-namespace:ASP.NetMonitoringWPF.Views">
     <Application.Resources>
         <ResourceDictionary>
@@ -10,13 +10,18 @@
                 <ResourceDictionary Source="/Styles/MinimizeMaximizeCrossButtons.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewmodels:GraphMonitoringViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:GraphMonitoringViewModel}">
                 <views:GraphMonitoringView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:NotificationViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:NotificationViewModel}">
                 <views:NotificationView />
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModels:MetersDataViewModel}">
+                <views:MetersDataView />
+            </DataTemplate>
+            
         </ResourceDictionary>
 
 

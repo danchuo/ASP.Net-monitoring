@@ -17,11 +17,9 @@
         </Grid.Background>
 
         <Grid Margin="5">
-
             <lvc:CartesianChart Style="{StaticResource FontBase}"
                                 Series="{Binding SeriesCollection}" LegendLocation="Top"
-                                DisableAnimations="True"
-                                Hoverable="False">
+                                DisableAnimations="True" Hoverable="False">
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Foreground="Black" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>

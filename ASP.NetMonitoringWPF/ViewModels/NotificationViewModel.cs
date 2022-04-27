@@ -13,13 +13,11 @@ public class NotificationViewModel : ViewModelBase {
 
     public MessageViewModel ErrorMessageViewModel { get; }
 
-    public ReadOnlyObservableCollection<ObservedDataChanges> DataChangesList => _dataCenter.DataChangesList;
-
-    private string _email = String.Empty;
+    private string _email = string.Empty;
     private string _computerName;
 
     public bool IsNotificationEnable { get; set; } = false;
-    
+
     public string ErrorMessage {
         set => ErrorMessageViewModel.Message = value;
     }
@@ -32,7 +30,6 @@ public class NotificationViewModel : ViewModelBase {
         }
     }
 
-
     public string ComputerName {
         get => _computerName;
         set {
@@ -40,7 +37,6 @@ public class NotificationViewModel : ViewModelBase {
             OnPropertyChanged(nameof(ComputerName));
         }
     }
-
 
     public ICommand ChangeConnectionCommand { get; set; }
 

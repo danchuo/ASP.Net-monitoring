@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{76E5AEBA-CE43-4EF1-BCFD-85BFAB216113}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NetMonitoringWPF", "ASP.NetMonitoringWPF\ASP.NetMonitoringWPF.csproj", "{758A5D2C-8D21-4F7C-AF84-2B99703F41C0}"
 EndProject
 Global
