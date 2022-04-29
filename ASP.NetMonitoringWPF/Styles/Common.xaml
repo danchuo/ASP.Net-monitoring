@@ -132,7 +132,7 @@
     </Style>
 
 
-    <Style x:Key="TextBlockOrders" TargetType="TextBlock" BasedOn="{StaticResource FontBase}">
+    <Style x:Key="TextBlockTable" TargetType="TextBlock" BasedOn="{StaticResource FontBase}">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="20" />
@@ -141,6 +141,44 @@
     </Style>
 
 
+    <Style TargetType="Button" x:Key="PropertyButton" BasedOn="{StaticResource FontBase}">
+        
+        <Setter Property="Background" Value="White" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation To="#1db954" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" />
+                        <ColorAnimation To="White" Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation To="Black" Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" />
+                        <ColorAnimation To="White" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
         <Setter Property="Background" Value="#1db954" />
         <Setter Property="Focusable" Value="False" />

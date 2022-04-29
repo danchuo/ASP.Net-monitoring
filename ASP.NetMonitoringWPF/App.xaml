@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:ASP.NetMonitoringWPF.ViewModels"
-             xmlns:views="clr-namespace:ASP.NetMonitoringWPF.Views">
+             xmlns:views="clr-namespace:ASP.NetMonitoringWPF.Views"
+             xmlns:commands="clr-namespace:ASP.NetMonitoringWPF.Commands"
+             xmlns:converters="clr-namespace:ASP.NetMonitoringWPF.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,11 +19,19 @@
             <DataTemplate DataType="{x:Type viewModels:NotificationViewModel}">
                 <views:NotificationView />
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModels:MetersDataViewModel}">
                 <views:MetersDataView />
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type viewModels:ParameterListModelView}">
+                <views:ParameterListView />
+            </DataTemplate>
+
+            <converters:StringToSplitStringConverter x:Key="StringToSplitStringConverter" />
+            <converters:QueryToPropertyNameConverter x:Key="QueryToPropertyNameConverter" />
+
+
         </ResourceDictionary>
 
 

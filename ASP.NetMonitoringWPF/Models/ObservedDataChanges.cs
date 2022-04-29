@@ -60,6 +60,11 @@ public class ObservedDataChanges : INotifyPropertyChanged {
         _timer.Enabled = true;
     }
 
+
+    public static void DeleteFromTimerList(ObservedDataChanges value) {
+        _timer.Elapsed -= value.UpdateData;
+    }
+
     private static void AddSecond(object? source, ElapsedEventArgs e) {
         _currentPosition = (_currentPosition + 1) % Period;
         _times[_currentPosition] = DateTime.Now.ToString("hh:mm:ss");

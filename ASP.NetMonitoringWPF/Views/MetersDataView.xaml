@@ -15,8 +15,68 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <WrapPanel Margin="20 20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Column="1" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasData}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <StackPanel>
+                <Border CornerRadius="5" Margin="5">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" />
+                    </Border.Effect>
+                    <Border.Background>
+                        <SolidColorBrush Color="#434343" Opacity="0.8" />
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Margin="5"
+                                   TextAlignment="Center"
+                                   Text="Добавьте счётчики во вкладке &#10;&quot;Список параметров&quot;"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Foreground="White"
+                                   FontFamily="#Gotham"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+
+        <WrapPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalAlignment="Stretch"
+                   Margin="20 20">
             <Border Margin="10" Width="1200" Height="60">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasData}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <StackPanel>
                     <Border Width="1190" Height="50" CornerRadius="5" Margin="5">
                         <Border.Effect>
@@ -34,21 +94,21 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"
-                                       Style="{StaticResource TextBlockOrders}"
+                                       Style="{StaticResource TextBlockTable}"
                                        Text="Имя"
                                        Margin="5" />
                             <TextBlock Grid.Column="1"
-                                       Style="{StaticResource TextBlockOrders}"
+                                       Style="{StaticResource TextBlockTable}"
                                        Text="Минимальное"
                                        Margin="5" />
 
                             <TextBlock Grid.Column="2"
-                                       Style="{StaticResource TextBlockOrders}"
+                                       Style="{StaticResource TextBlockTable}"
                                        Text="Максимальное"
                                        Margin="5" />
 
                             <TextBlock Grid.Column="3"
-                                       Style="{StaticResource TextBlockOrders}"
+                                       Style="{StaticResource TextBlockTable}"
                                        Text="Среднее"
                                        Margin="5" />
                         </Grid>
@@ -82,25 +142,28 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBlock
                                                 Grid.Column="0"
-                                                Margin="5" Text="{Binding PropertyName, ConverterCulture=ru-RU}"
+                                                Margin="5"
+                                                Text="{Binding PropertyName,
+                                                Converter={StaticResource StringToSplitStringConverter},
+                                                ConverterCulture=ru-RU}"
                                                 FontSize="17"
                                                 TextWrapping="Wrap"
-                                                Style="{StaticResource TextBlockOrders}" />
+                                                Style="{StaticResource TextBlockTable}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 TextWrapping="Wrap"
                                                 Margin="5" Text="{Binding MinimalValue}"
-                                                Style="{StaticResource TextBlockOrders}" />
+                                                Style="{StaticResource TextBlockTable}" />
                                             <TextBlock
                                                 Grid.Column="2"
                                                 TextWrapping="Wrap"
                                                 Margin="5" Text="{Binding MaximalValue}"
-                                                Style="{StaticResource TextBlockOrders}" />
+                                                Style="{StaticResource TextBlockTable}" />
                                             <TextBlock
                                                 Grid.Column="3"
                                                 TextWrapping="Wrap"
                                                 Margin="5" Text="{Binding AverageValue, StringFormat={}{0:N2}}"
-                                                Style="{StaticResource TextBlockOrders}" />
+                                                Style="{StaticResource TextBlockTable}" />
                                         </Grid>
                                     </Border>
                                 </StackPanel>

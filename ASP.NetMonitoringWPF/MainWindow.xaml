@@ -63,6 +63,15 @@
                     </RadioButton>
 
                     <RadioButton Grid.Row="3"
+                                 Command="{Binding ViewParameterListCommand}">
+                        <RadioButton.Style>
+                            <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton">
+                                <Setter Property="Content" Value="Список параметров" />
+                            </Style>
+                        </RadioButton.Style>
+                    </RadioButton>
+                    
+                    <RadioButton Grid.Row="4"
                                  Command="{Binding ViewMetersDataCommand}">
                         <RadioButton.Style>
                             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton">
@@ -71,7 +80,7 @@
                         </RadioButton.Style>
                     </RadioButton>
 
-                    <RadioButton Grid.Row="4"
+                    <RadioButton Grid.Row="5"
                                  Command="{Binding ViewNotificationCommand}">
                         <RadioButton.Style>
                             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton">
@@ -85,7 +94,7 @@
         </Grid>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Right" Panel.ZIndex="1">
-            <controls:MaxMinCrossStackPanel Height="33" Width="135" />
+            <controls:MaxMinCrossStackPanel Height="30" Width="135" />
         </StackPanel>
 
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

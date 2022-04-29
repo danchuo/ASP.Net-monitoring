@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Wpf;
 
 namespace ASP.NetMonitoringWPF.Models;
 
-public class DataCenter {
+public class DataCenter : INotifyPropertyChanged {
 
     public SeriesCollection SeriesCollection { get; }
 
@@ -21,10 +23,7 @@ public class DataCenter {
 
         set {
             _cimConnection = value;
-            ObservedDataChanges.StopUpdating();
-            _data.Clear();
-            SeriesCollection.Clear();
-            Init();
+            Restart();
         }
     }
 
@@ -35,40 +34,48 @@ public class DataCenter {
         DataChangesList = new ReadOnlyObservableCollection<ObservedDataChanges>(_data);
         _cimConnection = cimConnection;
         SeriesCollection = new SeriesCollection();
-        Init();
-    }
-
-    private void AddLines() {
-        var fillBrush = new SolidColorBrush {Opacity = 0};
-        foreach (var value in _data) {
-            SeriesCollection.Add(
-                new LineSeries {
-                    Title = value.PropertyName,
-                    Values = value.Data,
-                    PointGeometrySize = 0,
-                    Fill = fillBrush
-                });
-        }
-    }
-
-    private void Init() {
-        AddVariable("Select RequestsPerSec from Win32_PerfFormattedData_ASP_ActiveServerPages");
-        AddVariable("Select ErrorsPerSec from Win32_PerfFormattedData_ASP_ActiveServerPages");
-        AddVariable("Select RequestsQueued from Win32_PerfFormattedData_ASP_ActiveServerPages");
-        AddVariable("Select ApplicationsRunning from Win32_PerfFormattedData_ASPNET_ASPNET");
-        AddVariable("Select ManagedMemoryUsedestimated from Win32_PerfRawData_ASPNET4030319_ASPNETAppsv4030319");
-        AddVariable(
-            "Select PercentManagedProcessorTimeestimated from Win32_PerfFormattedData_ASPNET_ASPNETApplications");
-        AddLines();
         ObservedDataChanges.StartUpdating();
     }
 
-    public void AddVariable(string wmiQuery) => _data.Add(new ObservedDataChanges(_cimConnection, wmiQuery));
+    private void Restart() {
+        ObservedDataChanges.StopUpdating();
+        _data.Clear();
+        SeriesCollection.Clear();
+        ObservedDataChanges.StartUpdating();
+        OnPropertyChanged(nameof(CimConnection));
+    }
+
+    private void AddLine(ObservedDataChanges dataChanges) {
+        SeriesCollection.Add(
+            new LineSeries {
+                Title = dataChanges.PropertyName,
+                Values = dataChanges.Data,
+                PointGeometrySize = 0,
+                Fill = new SolidColorBrush {Opacity = 0}
+            });
+    }
+
+
+    public void AddVariable(string wmiQuery) {
+        var newData = new ObservedDataChanges(_cimConnection, wmiQuery);
+        _data.Add(newData);
+        AddLine(newData);
+    }
 
     public void DeleteVariableByName(string name) {
-        if (_data.FirstOrDefault(x => x.PropertyName == name) != null) {
-            _data.Remove(_data.First(x => x.PropertyName == name));
+        if (_data.FirstOrDefault(x => x.PropertyName == name) == null) return;
+        {
+            SeriesCollection.Remove(SeriesCollection.FirstOrDefault(x => x.Title == name));
+            var toDelete = _data.First(x => x.PropertyName == name);
+            _data.Remove(toDelete);
+            ObservedDataChanges.DeleteFromTimerList(toDelete);
         }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged(string propertyName) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
 }

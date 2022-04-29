@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ASP.NetMonitoringWPF; 
+namespace ASP.NetMonitoringWPF;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -21,7 +21,13 @@ namespace ASP.NetMonitoringWPF;
 public partial class MainWindow : Window {
 
     public MainWindow() {
-        InitializeComponent();
+        try {
+            InitializeComponent();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
 }

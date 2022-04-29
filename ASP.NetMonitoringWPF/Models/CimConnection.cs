@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Management.Infrastructure;
 
@@ -22,10 +23,13 @@ public class CimConnection {
     public IEnumerable<CimInstance> MakeQuery(string queryExpression) =>
         _cimSession.QueryInstances(@"root\cimv2", "WQL", queryExpression);
 
-    public int GetPropertyValue(string propertyName, string queryExpression) {
-        return MakeQuery(queryExpression).FirstOrDefault()!.CimInstanceProperties
-            .Where(x => x.Name == propertyName)
-            .Select(x => int.Parse(x.Value.ToString() ?? "0")).FirstOrDefault();
+    private static readonly Random Rnd = new();
+
+    public double GetPropertyValue(string propertyName, string queryExpression) {
+        return //Rnd.Next(100) +
+               MakeQuery(queryExpression).FirstOrDefault()!.CimInstanceProperties
+                   .Where(x => x.Name == propertyName)
+                   .Select(x => int.Parse(x.Value.ToString() ?? "0")).FirstOrDefault();
     }
 
 }
