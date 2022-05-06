@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Media;
 using LiveCharts;
-using LiveCharts.Wpf;
+using LiveCharts.Geared;
 
 namespace ASP.NetMonitoringWPF.Models;
 
@@ -39,19 +37,23 @@ public class DataCenter : INotifyPropertyChanged {
 
     private void Restart() {
         ObservedDataChanges.StopUpdating();
-        _data.Clear();
-        SeriesCollection.Clear();
+
+        while (_data.Count > 0) {
+            DeleteVariableByName(_data[0].PropertyName);
+        }
+
         ObservedDataChanges.StartUpdating();
         OnPropertyChanged(nameof(CimConnection));
     }
 
     private void AddLine(ObservedDataChanges dataChanges) {
         SeriesCollection.Add(
-            new LineSeries {
+            new GLineSeries {
                 Title = dataChanges.PropertyName,
                 Values = dataChanges.Data,
-                PointGeometrySize = 0,
-                Fill = new SolidColorBrush {Opacity = 0}
+                PointGeometrySize = double.NaN,
+                Fill = new SolidColorBrush {Opacity = 0},
+                StrokeThickness = 1.5
             });
     }
 

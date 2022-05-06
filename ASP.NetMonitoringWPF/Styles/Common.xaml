@@ -8,6 +8,9 @@
     <Color x:Key="Black2">#181818</Color>
     <SolidColorBrush x:Key="Black2Brush" Color="{StaticResource Black2}" />
 
+    <Color x:Key="FirstMain">#1db954</Color>
+    <SolidColorBrush x:Key="FirstMainBrush" Color="{StaticResource FirstMain}" />
+
     <Color x:Key="Black">#121212</Color>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
 
@@ -34,6 +37,19 @@
                 <Setter Property="Background" Value="#404040" />
             </Trigger>
         </Style.Triggers>
+
+    </Style>
+
+
+    <Style TargetType="TextBlock" x:Key="TextBlock" BasedOn="{StaticResource FontBase}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="5" />
 
     </Style>
 
@@ -138,6 +154,8 @@
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="5" />
     </Style>
 
 
@@ -158,12 +176,16 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
 
+
+    <Style TargetType="Button" x:Key="ColoredPropertyButton" BasedOn="{StaticResource PropertyButton}">
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
-                        <ColorAnimation To="#1db954" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" />
+                        <ColorAnimation To="{StaticResource FirstMain}" Duration="0:0:0.1"
+                                        Storyboard.TargetProperty="Background.Color" />
                         <ColorAnimation To="White" Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -178,9 +200,10 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-    
+
+
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
-        <Setter Property="Background" Value="#1db954" />
+        <Setter Property="Background" Value="{StaticResource FirstMainBrush}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Foreground" Value="Black" />
@@ -192,13 +215,91 @@
                 <ScaleTransform ScaleX="2" ScaleY="2" />
             </Setter.Value>
         </Setter>
-        
+
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="#1db954" />
+                <Setter Property="Background" Value="{StaticResource FirstMainBrush}" />
                 <Setter Property="Foreground" Value="Black" />
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border CornerRadius="0.5" BorderThickness="3" BorderBrush="Black" Background="Black" Height="6" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border CornerRadius="0.5" SnapsToDevicePixels="True" Background="{StaticResource GrayBrush}"
+                            BorderThickness="3"
+                            BorderBrush="{StaticResource FirstMainBrush}" Height="6" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderThumb" TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Ellipse Height="20" Width="20" Fill="White" StrokeThickness="0.5"
+                             Stroke="White">
+                    </Ellipse>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Slider" TargetType="Slider">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Track Grid.Row="1" x:Name="PART_Track">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource SliderRepeatButton1}" Command="Slider.DecreaseLarge" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource SliderThumb}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="HorizontalSlider" TargetType="Slider">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="MinHeight" Value="21" />
+                <Setter Property="MinWidth" Value="104" />
+                <Setter Property="Template" Value="{StaticResource Slider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
 </ResourceDictionary>

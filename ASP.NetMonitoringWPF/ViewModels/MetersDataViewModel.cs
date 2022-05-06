@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-using System.Windows.Input;
-using ASP.NetMonitoringWPF.Commands;
+﻿using System.Collections.ObjectModel;
 using ASP.NetMonitoringWPF.Models;
 
 namespace ASP.NetMonitoringWPF.ViewModels;

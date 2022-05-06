@@ -35,9 +35,10 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Width="200"
+                    <TextBlock Width="200" MouseDown="UIElement_OnMouseDown"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Foreground="White"
@@ -85,6 +86,15 @@
                         <RadioButton.Style>
                             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton">
                                 <Setter Property="Content" Value="Уведомления" />
+                            </Style>
+                        </RadioButton.Style>
+                    </RadioButton>
+                    
+                    <RadioButton Grid.Row="6"
+                                 Command="{Binding ViewAddTriggersCommand}">
+                        <RadioButton.Style>
+                            <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton">
+                                <Setter Property="Content" Value="Добавить триггеры" />
                             </Style>
                         </RadioButton.Style>
                     </RadioButton>

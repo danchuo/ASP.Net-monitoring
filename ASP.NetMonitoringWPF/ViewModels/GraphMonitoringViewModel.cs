@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using ASP.NetMonitoringWPF.Models;
 using LiveCharts;
-using LiveCharts.Wpf;
 using ObservedDataChanges = ASP.NetMonitoringWPF.Models.ObservedDataChanges;
 
 namespace ASP.NetMonitoringWPF.ViewModels;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ASP.NetMonitoringWPF.Commands;
 using ASP.NetMonitoringWPF.Models;
@@ -18,8 +16,6 @@ public class ParameterListModelView : ViewModelBase {
 
     public ParameterListModelView(ParameterList parameterList) {
         _parameterList = parameterList;
-
-        
 
         AddDeletePropertyCommand = new AddDeletePropertyCommand(parameterList.DataCenter);
         AddAllPropertiesCommand = new AddAllPropertiesCommand(parameterList.DataCenter);

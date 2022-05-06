@@ -49,17 +49,10 @@
                         <SolidColorBrush Color="#434343" Opacity="0.8" />
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Margin="5"
-                                   TextAlignment="Center"
-                                   Text="Добавьте счётчики во вкладке &#10;&quot;Список параметров&quot;"
-                                   FontSize="18"
-                                   FontWeight="SemiBold"
-                                   Foreground="White"
-                                   FontFamily="#Gotham"
-                                   TextWrapping="Wrap" />
+                        <TextBlock Style="{StaticResource TextBlock}"
+                                   Text="Добавьте счётчики во вкладке &#10;&quot;Список параметров&quot;" />
                     </StackPanel>
                 </Border>
-
             </StackPanel>
         </Border>
 
@@ -95,22 +88,18 @@
 
                             <TextBlock Grid.Column="0"
                                        Style="{StaticResource TextBlockTable}"
-                                       Text="Имя"
-                                       Margin="5" />
+                                       Text="Имя" />
                             <TextBlock Grid.Column="1"
                                        Style="{StaticResource TextBlockTable}"
-                                       Text="Минимальное"
-                                       Margin="5" />
+                                       Text="Минимальное" />
 
                             <TextBlock Grid.Column="2"
                                        Style="{StaticResource TextBlockTable}"
-                                       Text="Максимальное"
-                                       Margin="5" />
+                                       Text="Максимальное" />
 
                             <TextBlock Grid.Column="3"
                                        Style="{StaticResource TextBlockTable}"
-                                       Text="Среднее"
-                                       Margin="5" />
+                                       Text="Среднее" />
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -142,27 +131,22 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBlock
                                                 Grid.Column="0"
-                                                Margin="5"
                                                 Text="{Binding PropertyName,
                                                 Converter={StaticResource StringToSplitStringConverter},
                                                 ConverterCulture=ru-RU}"
                                                 FontSize="17"
-                                                TextWrapping="Wrap"
                                                 Style="{StaticResource TextBlockTable}" />
                                             <TextBlock
                                                 Grid.Column="1"
-                                                TextWrapping="Wrap"
-                                                Margin="5" Text="{Binding MinimalValue}"
+                                                Text="{Binding MinimalValue}"
                                                 Style="{StaticResource TextBlockTable}" />
                                             <TextBlock
                                                 Grid.Column="2"
-                                                TextWrapping="Wrap"
-                                                Margin="5" Text="{Binding MaximalValue}"
+                                                Text="{Binding MaximalValue}"
                                                 Style="{StaticResource TextBlockTable}" />
                                             <TextBlock
                                                 Grid.Column="3"
-                                                TextWrapping="Wrap"
-                                                Margin="5" Text="{Binding AverageValue, StringFormat={}{0:N2}}"
+                                                Text="{Binding AverageValue, StringFormat={}{0:N2}}"
                                                 Style="{StaticResource TextBlockTable}" />
                                         </Grid>
                                     </Border>

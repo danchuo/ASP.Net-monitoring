@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ASP.NetMonitoringWPF.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:models="clr-namespace:ASP.NetMonitoringWPF.Models"
              d:DataContext="{d:DesignInstance Type=viewModels:NotificationViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1080">
@@ -17,11 +18,11 @@
         </Grid.Background>
 
         <WrapPanel Margin="20 20">
-            <Border Margin="10" Width="1200" Height="350">
+            <Border Margin="10" Width="1200" Height="400">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="120" />
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="120" />
                         <RowDefinition Height="120" />
                         <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
@@ -33,6 +34,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox Grid.Column="0" Grid.Row="0"
+                             x:Name="EmailTextBox"
                              Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource TextBox}">
                     </TextBox>
@@ -60,9 +62,10 @@
                     </TextBlock>
 
                     <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource MainButton}"
-                            Command="{Binding RegisterCommand}"
+                            Command="{Binding SetEmailCommand}"
+                            CommandParameter="{Binding Email }"
                             Content="П Р И В Я З А Т Ь  П О Ч Т У"
-                            Background="#1db954"
+                            Background="{StaticResource FirstMainBrush}"
                             Foreground="White" />
 
                     <Grid Grid.Column="0" Grid.Row="1" Height="38" Margin="0,10,0,0">
@@ -77,15 +80,37 @@
                                    Foreground="White" />
                         <CheckBox Grid.Column="1"
                                   BorderThickness="0"
+                                  IsHitTestVisible="False"
                                   IsThreeState="False"
-                                  IsChecked="{Binding IsNotificationEnable,Mode=TwoWay}"
+                                  IsChecked="{Binding NotificationCheckBox,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                   Margin="90,3,0,7"
-                                  Background="#1db954">
+                                  Background="{StaticResource FirstMainBrush}">
                             <CheckBox.LayoutTransform>
                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                             </CheckBox.LayoutTransform>
                         </CheckBox>
                     </Grid>
+
+
+                    <Button Grid.Column="1" Grid.Row="1"
+                            Command="{Binding ChangeNotificationStatusCommand}"
+                            Background="{StaticResource FirstMainBrush}">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource MainButton}">
+                                <Setter Property="Content" Value="В К Л Ю Ч И Т Ь  У В Е Д О М Л Е Н И Я" />
+                                <Setter Property="Background" Value="{StaticResource FirstMainBrush}" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Style.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding NotificationCheckBox, UpdateSourceTrigger=PropertyChanged}"
+                                        Value="True">
+                                        <Setter Property="Content" Value="О Т К Л Ю Ч И Т Ь  У В Е Д О М Л Е Н И Я" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
 
                     <TextBox Grid.Column="0" Grid.Row="2"
                              Text="{Binding ComputerName, UpdateSourceTrigger=PropertyChanged}"
@@ -118,7 +143,7 @@
                             Command="{Binding ChangeConnectionCommand}"
                             CommandParameter="{Binding ComputerName}"
                             Content="И З М Е Н И Т Ь  К О М П Ь Ю Т Е Р"
-                            Background="#1db954"
+                            Background="{StaticResource FirstMainBrush}"
                             Foreground="White" />
 
                     <Border Grid.Column="1" Grid.Row="3" Margin="13,0,13,0"
@@ -148,6 +173,138 @@
                     </Border>
                 </Grid>
             </Border>
+
+
+            <WrapPanel HorizontalAlignment="Stretch"
+                       Margin="20 20">
+                <Border Margin="10" Width="1200" Height="60">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasData}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <ItemsControl x:Name="GroupList"
+                              ItemsSource="{Binding TriggerGroups}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:Name="CurrentGroup">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0" Margin="10" Width="600" Height="90">
+                                    <StackPanel>
+                                        <Border Width="590" Height="70" CornerRadius="5" Margin="5">
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="1" />
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <SolidColorBrush Color="#434343" Opacity="0.8" />
+                                            </Border.Background>
+                                            <Grid>
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock
+                                                    Text="{Binding GroupName, ConverterCulture=ru-RU,
+                                                    StringFormat=Группа {0},Converter={StaticResource StringToReadableNameConverter}}"
+                                                    Style="{StaticResource TextBlockTable}" />
+                                                <Button Grid.Column="1" Width="100" Height="30"
+                                                        Content="Удалить"
+                                                        ToolTip="Удаляет выбранную группу вместе с триггерами"
+                                                        Command="{Binding ElementName=GroupList,  Path=DataContext.DeleteTriggerGroupCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource ColoredPropertyButton}" />
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                                <ItemsControl x:Name="TriggerList"
+                                              Grid.Row="1" ItemsSource="{Binding TriggerList}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+
+                                                <Border Grid.Row="0" Margin="10" Width="1100" Height="90">
+                                                    <StackPanel>
+                                                        <Border Width="1090" Height="70" CornerRadius="5"
+                                                                Margin="5">
+                                                            <Border.Effect>
+                                                                <DropShadowEffect ShadowDepth="1" />
+                                                            </Border.Effect>
+                                                            <Border.Background>
+                                                                <SolidColorBrush Color="#36393d" Opacity="0.8" />
+                                                            </Border.Background>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock
+                                                                    Grid.Column="0"
+                                                                    Text="{Binding PropertyName,
+                                                Converter={StaticResource StringToSplitStringConverter},
+                                                ConverterCulture=ru-RU, StringFormat=Свойство {0}}"
+                                                                    Style="{StaticResource TextBlockTable}" />
+                                                                <TextBlock
+                                                                    Grid.Column="1"
+                                                                    Text="{Binding IsMonitoring,
+                                                                    StringFormat=Наблюдается? {0},Converter={StaticResource BoolToStringConverter}}"
+                                                                    Style="{StaticResource TextBlockTable}" />
+                                                                <TextBlock
+                                                                    Grid.Column="2"
+                                                                    Style="{StaticResource TextBlockTable}">
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding
+                                                                            StringFormat="{} Нарушений: {0} из {1}">
+                                                                            <Binding Path="ViolationCounter" />
+                                                                            <Binding Path="TimeInterval" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                                <Button Grid.Column="3" Width="100" Height="30"
+                                                                        Content="Удалить"
+                                                                        ToolTip="Удаляет выбранный триггер из группы"
+                                                                        Command="{Binding ElementName=GroupList,  Path=DataContext.DeleteTriggerCommand}"
+                                                                        Style="{StaticResource ColoredPropertyButton}">
+                                                                    <Button.CommandParameter>
+                                                                        <MultiBinding
+                                                                            Converter="{StaticResource TriggerWithGroupConverter}">
+                                                                            <Binding />
+                                                                            <Binding ElementName="GroupList" Path="." />
+                                                                        </MultiBinding>
+                                                                    </Button.CommandParameter>
+                                                                </Button>
+                                                            </Grid>
+                                                        </Border>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
         </WrapPanel>
+
     </Grid>
 </UserControl>

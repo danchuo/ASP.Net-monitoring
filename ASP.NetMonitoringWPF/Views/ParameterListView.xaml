@@ -34,20 +34,11 @@
 
                             <TextBlock Grid.Column="0"
                                        Style="{StaticResource TextBlockTable}"
-                                       Text="Имя"
-                                       Margin="5" />
-                            <!-- <TextBlock Grid.Column="1" -->
-                            <!--            Style="{StaticResource TextBlockTable}" -->
-                            <!--            Margin="5" /> -->
-                            <!-- -->
-                            <!-- <TextBlock Grid.Column="2" -->
-                            <!--            Style="{StaticResource TextBlockTable}" -->
-                            <!--            Margin="5" /> -->
+                                       Text="Имя" />
 
                             <TextBlock Grid.Column="1"
                                        Style="{StaticResource TextBlockTable}"
-                                       Text="Статус отслеживания"
-                                       Margin="5" />
+                                       Text="Статус отслеживания" />
 
                             <Grid Grid.Column="2">
                                 <Grid.ColumnDefinitions>
@@ -61,7 +52,7 @@
                                         CommandParameter="{Binding AllParametersList}">
                                     <Button.Style>
                                         <Style TargetType="Button"
-                                               BasedOn="{StaticResource PropertyButton}">
+                                               BasedOn="{StaticResource ColoredPropertyButton}">
                                             <Setter Property="Content" Value="Добавить все" />
                                         </Style>
                                     </Button.Style>
@@ -72,15 +63,12 @@
                                         CommandParameter="{Binding AllParametersList}">
                                     <Button.Style>
                                         <Style TargetType="Button"
-                                               BasedOn="{StaticResource PropertyButton}">
+                                               BasedOn="{StaticResource ColoredPropertyButton}">
                                             <Setter Property="Content" Value="Удалить все" />
                                         </Style>
                                     </Button.Style>
                                 </Button>
-
-
                             </Grid>
-
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -113,11 +101,9 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBlock
                                                 Grid.Column="0"
-                                                Margin="5"
                                                 Text="{Binding Query,
                                                 Converter={StaticResource QueryToPropertyNameConverter}}"
                                                 FontSize="17"
-                                                TextWrapping="Wrap"
                                                 Style="{StaticResource TextBlockTable}" />
                                             <CheckBox
                                                 IsChecked="{Binding IsUnable, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -129,13 +115,13 @@
                                                     CommandParameter="{Binding}">
                                                 <Button.Style>
                                                     <Style TargetType="Button"
-                                                           BasedOn="{StaticResource PropertyButton}">
+                                                           BasedOn="{StaticResource ColoredPropertyButton}">
                                                         <Setter Property="Content" Value="Добавить" />
                                                         <Style.Triggers>
                                                             <DataTrigger
                                                                 Binding="{Binding IsUnable, UpdateSourceTrigger=PropertyChanged}"
                                                                 Value="True">
-                                                                <Setter Property="Content" Value="Убрать" />
+                                                                <Setter Property="Content" Value="Удалить" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using ASP.NetMonitoringWPF.Converters;
 using ASP.NetMonitoringWPF.Models;
 using ASP.NetMonitoringWPF.ViewModels;
-using Microsoft.Management.Infrastructure;
 
 namespace ASP.NetMonitoringWPF.Commands;
 
@@ -27,7 +27,7 @@ public class ChangeConnectionCommand : ICommand {
             var ans = cimConnection.MakeQuery(
                 "Select RequestsPerSec from Win32_PerfFormattedData_ASP_ActiveServerPages").FirstOrDefault();
             _dataCenter.CimConnection = cimConnection;
-            computerName = computerName.Length > 15 ? computerName[..15] + "..." : computerName;
+            computerName = (string)new StringToReadableNameConverter().Convert(computerName,null,null,null);
             _notificationViewModel.ErrorMessage = $"Компьютер {computerName} успешно подключён.";
         }
         catch (Exception) {

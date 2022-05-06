@@ -15,11 +15,13 @@ public class MainViewModel : ViewModelBase {
     public ICommand ViewNotificationCommand { get; }
     public ICommand ViewMetersDataCommand { get; }
     public ICommand ViewParameterListCommand { get; }
+    public ICommand ViewAddTriggersCommand { get; }
 
-    public MainViewModel(INavigator navigator, DataCenter dataCenter) {
+    public MainViewModel(INavigator navigator, DataCenter dataCenter,INotificationService notificationService) {
         _navigator = navigator;
         navigator.CurrentViewModelChanged += OnCurrentViewModelChanged;
         var parameterList = new ParameterList(dataCenter);
+        var notificationModel = new NotificationModel(dataCenter, notificationService);
 
         ViewGraphMonitoringCommand =
             new NavigateCommand<GraphMonitoringViewModel>(navigator,
@@ -29,10 +31,13 @@ public class MainViewModel : ViewModelBase {
                 () => new ParameterListModelView(parameterList));
         ViewNotificationCommand =
             new NavigateCommand<NotificationViewModel>(navigator,
-                () => new NotificationViewModel(dataCenter));
+                () => new NotificationViewModel(dataCenter,notificationModel));
         ViewMetersDataCommand =
             new NavigateCommand<MetersDataViewModel>(navigator,
                 () => new MetersDataViewModel(dataCenter));
+        ViewAddTriggersCommand =
+            new NavigateCommand<AddTriggerViewModel>(navigator,
+                () => new AddTriggerViewModel(dataCenter, notificationModel));
     }
 
     private void OnCurrentViewModelChanged() {

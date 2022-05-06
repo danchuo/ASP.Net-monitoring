@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -25,6 +24,8 @@ public class ObservedDataChanges : INotifyPropertyChanged {
     public double AverageValue { get; set; }
     public double MinimalValue { get; set; }
     public double MaximalValue { get; set; }
+
+    public double LastValue { get; set; }
 
     public static ReadOnlyObservableCollection<string> Times { get; }
 
@@ -76,6 +77,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
         Data[(_currentPosition + 2) % Period] = double.NaN;
         Data[(_currentPosition + 3) % Period] = double.NaN;
         Data[_currentPosition] = value;
+        LastValue = value;
 
         MaximalValue = Data.Where(x => !double.IsNaN(x)).Max();
         MinimalValue = Data.Where(x => !double.IsNaN(x)).Min();
@@ -84,6 +86,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
         OnPropertyChanged(nameof(MaximalValue));
         OnPropertyChanged(nameof(MinimalValue));
         OnPropertyChanged(nameof(AverageValue));
+        OnPropertyChanged(nameof(LastValue));
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
