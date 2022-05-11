@@ -48,6 +48,10 @@
     <None Remove="Resources\Icons\growth.png" />
   </ItemGroup>
 
+<ItemGroup>
+  <None Include="C:\Users\danchuo\Desktop\ClassDiagram.cd" Link="ClassDiagram.cd" />
+</ItemGroup>
+
   <ItemGroup>
     <Resource Include="Resources\Fonts\Gotham\Gotham-Black.otf" />
     <Resource Include="Resources\Fonts\Gotham\Gotham-Bold.otf" />

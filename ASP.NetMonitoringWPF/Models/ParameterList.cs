@@ -25,12 +25,8 @@ public class ParameterList {
         _uniqeParameters = new HashSet<string>();
         _allParametersList = new ObservableCollection<WmiProperty>(new List<WmiProperty>());
         AllParametersList = new ReadOnlyObservableCollection<WmiProperty>(_allParametersList);
-        AddProperties("Select * from Win32_PerfFormattedData_ASPNET4030319_ASPNETAppsv4030319");
-        AddProperties("Select * from Win32_PerfFormattedData_ASPNET_ASPNET");
-        AddProperties("Select * from Win32_PerfFormattedData_ASP_ActiveServerPages");
-        AddProperties("Select * from Win32_PerfFormattedData_ASPNET_ASPNETApplications");
 
-        // AddProperties("Select * From Win32_PerfFormattedData_PerfOS_Processor Where Name = \"_Total\"");
+        AddProperties("Select * from Win32_PerfFormattedData_ASPNET4030319_ASPNETAppsv4030319");
     }
 
     private void AddProperties(string query) {

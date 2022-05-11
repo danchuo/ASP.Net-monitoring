@@ -94,5 +94,4 @@ public class ObservedDataChanges : INotifyPropertyChanged {
     private void OnPropertyChanged(string propertyName) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }

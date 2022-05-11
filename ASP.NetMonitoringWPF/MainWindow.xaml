@@ -94,7 +94,7 @@
                                  Command="{Binding ViewAddTriggersCommand}">
                         <RadioButton.Style>
                             <Style BasedOn="{StaticResource NavButton}" TargetType="RadioButton">
-                                <Setter Property="Content" Value="Добавить триггеры" />
+                                <Setter Property="Content" Value="Добавить триггер" />
                             </Style>
                         </RadioButton.Style>
                     </RadioButton>

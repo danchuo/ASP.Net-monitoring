@@ -105,14 +105,26 @@
                         </StackPanel>
                     </Border>
 
-                    <ComboBox Grid.Column="1" Grid.Row="0" Width="200" Height="23"
+                    <ComboBox Grid.Column="1" Grid.Row="0" Width="300" Height="40"
                               ItemsSource="{Binding DataChangesList}"
                               SelectedItem="{Binding PropertyNameSelectedItem,
                               Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock
-                                    Text="{Binding PropertyName, Converter={StaticResource StringToSplitStringConverter}}" />
+                                <StackPanel>
+                                    <Border CornerRadius="5" Margin="5">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="1" />
+                                        </Border.Effect>
+                                        <Border.Background>
+                                            <SolidColorBrush Color="#434343" Opacity="0.8" />
+                                        </Border.Background>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource TextBlock}" FontSize="11"
+                                                       Text="{Binding PropertyName, Converter={StaticResource StringToSplitStringConverter}}" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -280,11 +292,30 @@
 
 
                     <ComboBox Grid.Column="1" Grid.Row="4"
-                              Width="200" Height="24"
+                              Width="300" Height="40"
                               ItemsSource="{Binding Path=TriggerGroupList}"
                               SelectedIndex="{Binding GroupNameSelectedIndex,
                               Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                              IsSynchronizedWithCurrentItem="True" />
+                              IsSynchronizedWithCurrentItem="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border CornerRadius="5" Margin="5">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="1" />
+                                        </Border.Effect>
+                                        <Border.Background>
+                                            <SolidColorBrush Color="#434343" Opacity="0.8" />
+                                        </Border.Background>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource TextBlock}" FontSize="11"
+                                                       Text="{Binding }" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
 
                     <Grid Grid.Column="0" Grid.Row="5" ColumnSpan="2">

@@ -22,12 +22,9 @@ public class CimConnection {
     public IEnumerable<CimInstance> MakeQuery(string queryExpression) =>
         _cimSession.QueryInstances(@"root\cimv2", "WQL", queryExpression);
 
-    private static readonly Random Rnd = new();
-
     public double GetPropertyValue(string propertyName, string queryExpression) {
         return MakeQuery(queryExpression).FirstOrDefault()!.CimInstanceProperties
             .Where(x => x.Name == propertyName)
-            .Select(x => int.Parse(x.Value.ToString() ?? "0")).FirstOrDefault();
+            .Select(x => double.Parse(x.Value.ToString() ?? "0")).FirstOrDefault();
     }
-
 }

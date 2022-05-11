@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ASP.NetMonitoringWPF.Models.DataCenter">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <Members>
+      <Field Name="_cimConnection" Hidden="true" />
+      <Field Name="_data" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+      <Property Name="SeriesCollection" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAgAAAAABAAAAAAAIAQgAAAAgAEgAAAAAAAAAFAAAAA=</HashCode>
+      <FileName>Models\DataCenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CimConnection" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="DataChangesList" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.CimConnection">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_cimSession" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAABAAAAAAAAAAAAAAAAAAQAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Models\CimConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.EmailNotification" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <Members>
+      <Field Name="_email" Hidden="true" />
+      <Field Name="_password" Hidden="true" />
+      <Field Name="_username" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AEQAACAAAAAAAAAAACAAAAAABAAAAAAAAQIAAAAAAAE=</HashCode>
+      <FileName>Models\EmailNotification.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.MonitoringTrigger" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_activePeriod" Hidden="true" />
+      <Field Name="_borderValue" Hidden="true" />
+      <Field Name="_condition" Hidden="true" />
+      <Field Name="_timeInterval" Hidden="true" />
+      <Field Name="_valueToMonitoring" Hidden="true" />
+      <Field Name="_violationCounter" Hidden="true" />
+      <Field Name="SecondToWait" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAACACIACIAAQSABAkAgAAAAAQAAQAABAQAA=</HashCode>
+      <FileName>Models\MonitoringTrigger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.NotificationModel">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_triggerGroupList" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACAIAAAEAAAAIAAAEBABAAABAAAAUAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\NotificationModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_notificationService" />
+      <Field Name="_dataCenter" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="TriggerGroupList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.ObservedDataChanges" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_cimConnection" Hidden="true" />
+      <Field Name="_currentPosition" Hidden="true" />
+      <Field Name="_timer" Hidden="true" />
+      <Field Name="_times" Hidden="true" />
+      <Field Name="_wmiQuery" Hidden="true" />
+      <Field Name="Period" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQQEAAgAAAAIAQAAAAogAAAAHMAAIAAAABAAAI=</HashCode>
+      <FileName>Models\ObservedDataChanges.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.ParameterList">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <Members>
+      <Field Name="_allParametersList" Hidden="true" />
+      <Field Name="_uniqeParameters" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAACABgAAAAAAAAAAIAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ParameterList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DataCenter" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AllParametersList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.TriggerGroup">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_triggerList" Hidden="true" />
+      <Field Name="MaxAmountOfTriggers" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAQAAABAAAAAAAAAAAAAAIAAAAAAAkCAAEgAAAAAAAU=</HashCode>
+      <FileName>Models\TriggerGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="TriggerList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ASP.NetMonitoringWPF.Models.WmiProperty" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="5.25" Width="1.5" />
+    <Members>
+      <Field Name="_isUnable" Hidden="true" />
+      <Field Name="_query" Hidden="true" />
+      <Method Name="OnPropertyChanged" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAgIAEAAAAAgAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\WmiProperty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="ASP.NetMonitoringWPF.Models.INotificationService">
+    <Position X="6.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAACAAAAAAAAAAACAAAAAABAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\INotificationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

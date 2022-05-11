@@ -11,6 +11,7 @@ public class TriggerGroup {
     private const int MaxAmountOfTriggers = 3;
 
     private readonly ObservableCollection<MonitoringTrigger> _triggerList;
+
     public ReadOnlyObservableCollection<MonitoringTrigger> TriggerList { get; }
 
     public bool CanAdd => TriggerList.Count < MaxAmountOfTriggers;
@@ -57,5 +58,4 @@ public class TriggerGroup {
     private void OnGroupTriggered() {
         GroupTriggered?.Invoke(this, EventArgs.Empty);
     }
-
 }

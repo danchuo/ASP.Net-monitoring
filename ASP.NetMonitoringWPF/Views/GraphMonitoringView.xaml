@@ -73,7 +73,7 @@
 
             <lvc:CartesianChart Style="{StaticResource FontBase}" Foreground="Black"
                                 Series="{Binding SeriesCollection}"
-                                LegendLocation="Top" DisableAnimations="True" Hoverable="False" DataTooltip="{x:Null}">
+                                LegendLocation="Top" DisableAnimations="True">
 
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Foreground="Black" LabelFormatter="{Binding YFormatter}">
