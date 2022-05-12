@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Timers;
@@ -19,6 +20,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
 
     private readonly CimConnection _cimConnection;
     private readonly string _wmiQuery;
+    private readonly PerformanceCounter _performanceCounter;
     public string PropertyName { get; }
     public ChartValues<double> Data { get; }
     public double AverageValue { get; set; }
@@ -31,7 +33,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
 
     public ObservedDataChanges(CimConnection cimConnection, string wmiQuery) {
         _cimConnection = cimConnection;
-        PropertyName = wmiQuery.Split()[1];
+        PropertyName = wmiQuery.Split(ParameterList.Delimiter)[1];
         _wmiQuery = wmiQuery;
 
         var array = new double[Period];
@@ -41,6 +43,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
 
         Data = new ChartValues<double>(array);
         _timer.Elapsed += UpdateData;
+        _performanceCounter = new PerformanceCounter(wmiQuery.Split(ParameterList.Delimiter)[0], PropertyName, "__Total__");
     }
 
     static ObservedDataChanges() {
@@ -72,7 +75,7 @@ public class ObservedDataChanges : INotifyPropertyChanged {
     }
 
     private void UpdateData(object? source, ElapsedEventArgs e) {
-        var value = _cimConnection.GetPropertyValue(PropertyName, _wmiQuery);
+        var value = _performanceCounter.NextValue();
         Data[(_currentPosition + 1) % Period] = double.NaN;
         Data[(_currentPosition + 2) % Period] = double.NaN;
         Data[(_currentPosition + 3) % Period] = double.NaN;
@@ -94,4 +97,5 @@ public class ObservedDataChanges : INotifyPropertyChanged {
     private void OnPropertyChanged(string propertyName) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
 }

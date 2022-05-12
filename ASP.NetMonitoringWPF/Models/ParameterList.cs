@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
-using Microsoft.Management.Infrastructure;
 
 namespace ASP.NetMonitoringWPF.Models;
 
 public class ParameterList {
 
+    public const char Delimiter = '*';
     public DataCenter DataCenter { get; }
     public ReadOnlyObservableCollection<WmiProperty> AllParametersList { get; private set; }
 
@@ -26,23 +27,21 @@ public class ParameterList {
         _allParametersList = new ObservableCollection<WmiProperty>(new List<WmiProperty>());
         AllParametersList = new ReadOnlyObservableCollection<WmiProperty>(_allParametersList);
 
-        AddProperties("Select * from Win32_PerfFormattedData_ASPNET4030319_ASPNETAppsv4030319");
+        AddProperties("ASP.NET Apps v4.0.30319");
     }
 
-    private void AddProperties(string query) {
-        var enumerable = DataCenter.CimConnection.MakeQuery(query);
+    private void AddProperties(string wmiClass) {
+        var connection = DataCenter.CimConnection.ComputerName == "localhost"
+            ? PerformanceCounterCategory.GetCategories()
+            : PerformanceCounterCategory.GetCategories(DataCenter.CimConnection.ComputerName);
+        var counters = connection.FirstOrDefault(x => x.CategoryName.Contains(wmiClass))
+            ?.GetCounters("__Total__");
 
-        foreach (var cimInstance in enumerable) {
-            foreach (var cimInstanceProperty in cimInstance.CimInstanceProperties) {
-                if (cimInstanceProperty.Value == null || (cimInstanceProperty.CimType != CimType.UInt32 &&
-                                                          cimInstanceProperty.CimType != CimType.UInt64)) continue;
-
-                if (_uniqeParameters.Contains(cimInstanceProperty.Name)) continue;
-                _uniqeParameters.Add(cimInstanceProperty.Name);
-                var isUnable = DataCenter.DataChangesList.Any(x => x.PropertyName == cimInstanceProperty.Name);
-                _allParametersList.Add(new WmiProperty
-                    {IsUnable = isUnable, Query = query.Replace("*", cimInstanceProperty.Name)});
-            }
+        foreach (var performanceCounter in counters) {
+            if (_uniqeParameters.Contains(performanceCounter.CounterName)) continue;
+            var isUnable = DataCenter.DataChangesList.Any(x => x.PropertyName == performanceCounter.CounterName);
+            _allParametersList.Add(new WmiProperty
+                {IsUnable = isUnable, Query = wmiClass + Delimiter + performanceCounter.CounterName});
         }
     }
 

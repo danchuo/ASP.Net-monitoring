@@ -32,8 +32,7 @@
                 <views:AddTriggerView />
             </DataTemplate>
 
-            <converters:StringToSplitStringConverter x:Key="StringToSplitStringConverter" />
-            <converters:QueryToPropertyNameConverter x:Key="QueryToPropertyNameConverter" />
+             <converters:QueryToPropertyNameConverter x:Key="QueryToPropertyNameConverter" />
             <converters:SecondsToMinutesConverter x:Key="SecondsToMinutesConverter" />
             <converters:StringToReadableNameConverter x:Key="StringToReadableNameConverter" />
             <converters:BoolToStringConverter x:Key="BoolToStringConverter" />

@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
+using System.Net.Mail;
 using System.Windows;
 using ASP.NetMonitoringWPF.Models;
 using ASP.NetMonitoringWPF.Navigator;
@@ -16,9 +18,19 @@ public partial class App {
         INavigator navigator = new Navigator.Navigator();
         var cimConnection = new CimConnection();
         var dataCenter = new DataCenter(cimConnection);
-        INotificationService notificationService =
-            new EmailNotification(ConfigurationManager.AppSettings["username"],
-                ConfigurationManager.AppSettings["password"]);
+        INotificationService notificationService;
+        
+        try {
+            notificationService =
+                new EmailNotification(EmailNotification.CreateSmtpClient(ConfigurationManager.AppSettings["host"],
+                    int.Parse(ConfigurationManager.AppSettings["port"]),
+                    bool.Parse(ConfigurationManager.AppSettings["enableSsl"]),
+                    ConfigurationManager.AppSettings["username"], ConfigurationManager.AppSettings["password"]));
+        }
+        catch (Exception) {
+            notificationService = new EmailNotification(new SmtpClient());
+        }
+
         navigator.CurrentViewModel = new GraphMonitoringViewModel(dataCenter);
 
         MainWindow = new MainWindow {

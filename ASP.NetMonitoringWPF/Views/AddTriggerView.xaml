@@ -58,7 +58,7 @@
         </Border>
 
         <WrapPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="20 20">
-            <Border Margin="10" Width="1200" Height="1000">
+            <Border Margin="10" Width="1200" Height="800">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Visibility" Value="Visible" />
@@ -72,7 +72,7 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="120" />
+                        <RowDefinition Height="100" />
                         <RowDefinition Height="120" />
                         <RowDefinition Height="120" />
                         <RowDefinition Height="120" />
@@ -121,7 +121,7 @@
                                         </Border.Background>
                                         <StackPanel>
                                             <TextBlock Style="{StaticResource TextBlock}" FontSize="11"
-                                                       Text="{Binding PropertyName, Converter={StaticResource StringToSplitStringConverter}}" />
+                                                       Text="{Binding PropertyName}" />
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>

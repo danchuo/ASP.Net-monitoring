@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Windows.Media.TextFormatting;
 
 namespace ASP.NetMonitoringWPF.Models;
 
@@ -8,14 +9,13 @@ public class EmailNotification : INotificationService {
 
     private string _email = string.Empty;
 
-    private readonly string _username;
-    private readonly string _password;
+    private readonly SmtpClient _smtpClient;
 
-    public EmailNotification(string username, string password) {
-        _username = username;
-        _password = password;
+
+    public EmailNotification(SmtpClient smtpClient) {
+        _smtpClient = smtpClient;
     }
-    
+
     public bool IsAddressSet { get; set; }
     public bool IsNotificationEnable { get; set; } = false;
     public string CurrentAddress => _email;
@@ -34,20 +34,8 @@ public class EmailNotification : INotificationService {
 
     public void SendMessage(string report) {
         if (!IsAddressSet || !IsNotificationEnable) return;
-       
-        var client = new SmtpClient {
-            Host = "smtp.gmail.com",
-            Port = 587,
-            EnableSsl = true,
-            DeliveryMethod = SmtpDeliveryMethod.Network,
-            UseDefaultCredentials = false,
-            Credentials = new NetworkCredential {
-                UserName = _username,
-                Password = _password
-            }
-        };
 
-        var from = new MailAddress(_username, "ASP.Net Monitoring");
+        var from = new MailAddress("asp.net.monitoring@gmail.com", "ASP.Net Monitoring");
         var to = new MailAddress(_email, "Пользователь");
         var message = new MailMessage {
             From = from,
@@ -56,9 +44,30 @@ public class EmailNotification : INotificationService {
         };
 
         message.To.Add(to);
-
-        client.SendMailAsync(message);
+        try {
+            _smtpClient?.SendMailAsync(message);
+        }
+        catch (Exception) {
+            // ignored
+        }
     }
 
+
+    public static SmtpClient CreateSmtpClient(string host, int port, bool enableSsl, string username, string password) {
+        var client = new SmtpClient {
+            Host = host,
+            Port = port,
+            EnableSsl = enableSsl,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential {
+                UserName = username,
+                Password = password
+            }
+        };
+
+
+        return client;
+    }
 
 }

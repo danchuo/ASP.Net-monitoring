@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using ASP.NetMonitoringWPF.Converters;
@@ -24,10 +25,14 @@ public class ChangeConnectionCommand : ICommand {
 
         try {
             var cimConnection = new CimConnection(computerName);
+            if (computerName != "localhost") {
+                PerformanceCounterCategory.GetCategories(computerName);
+            }
+
             var ans = cimConnection.MakeQuery(
                 "Select RequestsPerSec from Win32_PerfFormattedData_ASP_ActiveServerPages").FirstOrDefault();
             _dataCenter.CimConnection = cimConnection;
-            computerName = (string)new StringToReadableNameConverter().Convert(computerName,null,null,null);
+            computerName = (string) new StringToReadableNameConverter().Convert(computerName, null, null, null);
             _notificationViewModel.ErrorMessage = $"Компьютер {computerName} успешно подключён.";
         }
         catch (Exception) {

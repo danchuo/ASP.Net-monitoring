@@ -20,7 +20,7 @@ public class DeleteAllPropertiesCommand : ICommand {
 
         foreach (var property in allParametersList) {
             if (!property.IsUnable) continue;
-            _dataCenter.DeleteVariableByName(property.Query.Split(' ')[1]);
+            _dataCenter.DeleteVariableByName(property.Query.Split(ParameterList.Delimiter)[1]);
             property.IsUnable = !property.IsUnable;
         }
     }

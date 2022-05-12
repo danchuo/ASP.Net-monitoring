@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Windows.Input;
 using ASP.NetMonitoringWPF.Models;
 using ASP.NetMonitoringWPF.ViewModels;
@@ -20,7 +21,7 @@ public class AddDeletePropertyCommand : ICommand {
         if (parameter is not WmiProperty property) return;
 
         if (property.IsUnable) {
-            _dataCenter.DeleteVariableByName(property.Query.Split(' ')[1]);
+            _dataCenter.DeleteVariableByName(property.Query.Split(ParameterList.Delimiter)[1]);
         }
         else {
             _dataCenter.AddVariable(property.Query);
