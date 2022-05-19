@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="username" value="email"/>
+    <add key="password" value="password"/>
+    <add key="host" value="host"/>
+    <add key="port" value="port"/>
+    <add key="enableSsl" value="true"/>
+  </appSettings>
+</configuration>
