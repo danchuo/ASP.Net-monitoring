@@ -74,7 +74,7 @@ public class NotificationModel {
 
     private string GenerateReport(TriggerGroup triggerGroup) {
         var report = new StringBuilder();
-        report.Append($"Компьютер {_dataCenter.CimConnection.ComputerName}\n." +
+        report.Append($"Компьютер {_dataCenter.CimConnection.ComputerName}.\n" +
                       $"Сработала группа триггеров \"{triggerGroup.GroupName}\" в {DateTime.Now}.\n" +
                       $"Все наблюдаемые свойства вышли из допустимого диапазона.\n\n");
 
